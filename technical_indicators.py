@@ -14,3 +14,9 @@ def atr(data):
   atr = pandas_ta.atr(high = data['high'], low = data['low'], close = data['close'],length=15)
   return atr.sub(atr.mean()).div(atr.std())
 df['atr'] = df.groupby(level=1, group_keys=False).apply(atr)
+
+#MACD to analyze momentum 
+def macd(close):
+    macd = pandas_ta.macd(close = close, length=25).iloc[:,0]
+    return macd.sub(macd.mean()).div(macd.std())
+df['macd'] = df.groupby(level=1, group_keys=False)['adj close'].apply(macd)
