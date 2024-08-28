@@ -20,3 +20,6 @@ def macd(close):
     macd = pandas_ta.macd(close = close, length=25).iloc[:,0]
     return macd.sub(macd.mean()).div(macd.std())
 df['macd'] = df.groupby(level=1, group_keys=False)['adj close'].apply(macd)
+
+#Dollar Volume for money flow 
+df['dollar_volume'] = (df['adj close']*df['volume'])/1e6
