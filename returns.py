@@ -13,3 +13,6 @@ def returns(df):
             .sub(1)
         )
 return df
+
+#Adding to feature set to capture time series dynamics 
+aggdata = aggdata.groupby(level=1, group_keys=False).apply(returns)
