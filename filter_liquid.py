@@ -11,3 +11,6 @@ aggdata = pd.concat(
 #5 year rolling average and crossectional dollar volume rank
 aggdata['dollar_volume']=aggdata['dollar_volume'].unstack('ticker').rolling(5*12).mean().stack()
 aggdata['dollar_vol_rank'] = (aggdata.groupby('date')['dollar_volume'].rank(ascending=False))
+
+#Filtering top 150 stocks based on liquidity 
+aggdata = aggdata[aggdata['dollar_vol_rank']<150]
