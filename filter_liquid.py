@@ -1,3 +1,4 @@
+#Aggregating data to monthly level features in a new dataframe
 last_cols = [c for c in df.columns.unique(0) if c not in ['dollar_volume','volume','open', 'high','low','close']]
 aggdata = pd.concat(
     [
@@ -6,4 +7,7 @@ aggdata = pd.concat(
     ],
     axis=1
 ).dropna()
-#Aggregating data to monthly level features in a new dataframe
+
+#5 year rolling average and crossectional dollar volume rank
+aggdata['dollar_volume']=aggdata['dollar_volume'].unstack('ticker').rolling(5*12).mean().stack()
+aggdata['dollar_vol_rank'] = (aggdata.groupby('date')['dollar_volume'].rank(ascending=False))
