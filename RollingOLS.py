@@ -7,3 +7,8 @@ ffdata.index = ffdata.index.tz_localize('UTC')
 ffdata = ffdata.resample("M").last().div(100)
 ffdata.index.name = 'date'
 ffdata = ffdata.join(aggdata['return_1m']).sort_index()
+
+#Dropping the stocks with less than 6 months of data
+x = ffdata.groupby(level=1).size()
+valid_stocks = x[x >= 6]
+ffdata = ffdata [ffdata.index.get_level_values('ticker').isin(x.index)]
