@@ -18,5 +18,7 @@ ffdata['RFB'] = ffdata[['Mkt-RF', 'SMB', 'HML', 'RMW', 'CMA']].mean(axis=1)
 ffdata['RFB'] = ffdata.groupby(level='ticker')['RFB'].shift(-1)
 keep = ['RFB', 'SMB', 'HML', 'RMW', 'CMA']
 existing = [col for col in keep if col in ffdata.columns]
-#Filtering the dataframe to keep only the desired columns at this stage
+#Filtering the dataframe to keep only the desired columns and imputing missing values with mean
 ffdata = ffdata[existing]
+keep = ['RFB', 'SMB', 'HML', 'RMW', 'CMA']
+ffdata.loc[:, keep] =  ffdata.groupby('ticker', group_keys = False)[keep].apply(lambda x: x.fillna(x.mean()))
