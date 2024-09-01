@@ -12,3 +12,11 @@ ffdata = ffdata.join(aggdata['return_1m']).sort_index()
 x = ffdata.groupby(level=1).size()
 valid_stocks = x[x >= 6]
 ffdata = ffdata [ffdata.index.get_level_values('ticker').isin(x.index)]
+ffdata['RFB'] = ffdata[['Mkt-RF', 'SMB', 'HML', 'RMW', 'CMA']].mean(axis=1)
+
+#Shifting the rolling factor betas forward by one month
+ffdata['RFB'] = ffdata.groupby(level='ticker')['RFB'].shift(-1)
+keep = ['RFB', 'SMB', 'HML', 'RMW', 'CMA']
+existing = [col for col in keep if col in ffdata.columns]
+#Filtering the dataframe to keep only the desired columns at this stage
+ffdata = ffdata[existing]
