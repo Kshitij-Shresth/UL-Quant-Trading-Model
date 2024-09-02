@@ -19,4 +19,13 @@ def plot(aggdata):
     plt.ylabel('ATR')
     plt.legend()
     plt.grid(True)
-
+  
+def create_plots(aggdata):
+    plt.style.use('ggplot')
+    for date in aggdata.index.get_level_values('date').unique():
+        g = aggdata.xs(date, level=0)
+#Iterating over unique dates and visualizing      
+        plt.figure(figsize=(12, 8)) 
+        plt.title(f'Date {date.strftime("%Y-%m-%d")}')
+        plot(g)
+        plt.show()
