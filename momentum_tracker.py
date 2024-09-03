@@ -16,3 +16,18 @@ def find_highest_momentum_stocks(aggdata):
     print(sorted_stocks)
 
 find_highest_momentum_stocks(aggdata)
+
+#Plotting a risk cluster, color coded based on momentum 
+
+def plot_with_risk_clusters(aggdata):
+    colors = {'Low Risk': 'green', 'High Risk': 'red', 'Swing': 'grey'}
+        for risk_category, color in colors.items():
+        cluster_data = aggdata[aggdata['risk'] == risk_category]
+        plt.scatter(cluster_data['rsi'], cluster_data['atr'], color=color, label=risk_category)
+
+#Legend
+    plt.xlabel('RSI')
+    plt.ylabel('ATR')
+    plt.legend()
+    plt.grid(True)
+    plt.title('Risk Clusters Based on Momentum')
