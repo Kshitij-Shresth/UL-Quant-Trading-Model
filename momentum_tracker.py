@@ -25,7 +25,16 @@ def find_highest_momentum_stocks(aggdata):
     })
 
     return recent_data, stick
+    
+#Performing KMeans clustering with 3 clusters
 
+def cluster_risk_groups(aggdata):
+    features = aggdata[['rsi', 'atr']]
+    kmeans = KMeans(n_clusters=3, random_state=42)
+    aggdata['cluster'] = kmeans.fit_predict(features)
+
+    return aggdata
+    
 #Plotting a risk cluster, color coded based on momentum 
 def plot_with_risk_clusters(aggdata):
     colors = {'Low Risk': 'green', 'High Risk': 'red', 'Swing': 'grey'}
