@@ -48,3 +48,13 @@ def plot_with_risk_clusters(aggdata):
     plt.legend()
     plt.grid(True)
     plt.title('Risk Clusters Based on Momentum')
+
+#Clustering risk groups 
+def sticks(aggdata):
+    plt.style.use('ggplot')
+    recent_data, stick = find_highest_momentum_stocks(aggdata)
+    clustered_data = cluster_risk_groups(recent_data)
+    plt.figure(figsize=(12, 8))
+    plot_with_risk_clusters(clustered_data)
+    plt.show()
+stick = sticks(aggdata)
