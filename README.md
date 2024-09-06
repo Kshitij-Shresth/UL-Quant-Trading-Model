@@ -34,3 +34,19 @@ Understanding the risk profile of stocks is crucial for constructing portfolios 
 ### Implementation: 
 Stocks are classified into risk groups based on their momentum scores. The top 20% in momentum are labeled as 'Green,' indicating strong performance and potential for continued growth. Conversely, the bottom 20% are labeled as 'Red,' signaling potential underperformance or higher risk.
 
+### Liquidity Filtering:
+
+Liquidity is a critical consideration in trading and investment. Highly liquid stocks allow for easier entry and exit positions, reducing the impact of market movements on trades. By filtering for the most liquid stocks based on rolling average dollar volumes, the project ensures that the identified momentum stocks are practical for real-world trading strategies.
+
+
+# Files and Functions
+
+```data.py```
+
+Downloads historical stock data for S&P 500 stocks. Preprocesses and structures the dataset to include necessary features like price and volume.
+Ensures data consistency and handles missing values, saves for further analysis in other modules.
+
+```clusters.py```
+
+Applies KMeans clustering to group stocks based on specified features, analyzes clusters to identify patterns in stock behavior.
+Visualizes and assesses the resulting clusters using scatter plots. Generates visual representations of clusters over various dates to track changes over time.
