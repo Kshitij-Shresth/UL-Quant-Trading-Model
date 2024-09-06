@@ -46,7 +46,29 @@ Liquidity is a critical consideration in trading and investment. Highly liquid s
 Downloads historical stock data for S&P 500 stocks. Preprocesses and structures the dataset to include necessary features like price and volume.
 Ensures data consistency and handles missing values, saves for further analysis in other modules.
 
+```technical_indicators.py```
+
+Calculates advanced technical indicators such as RSI, ATR, and moving averages and enhances the stock data by adding features that capture momentum and volatility It incorporates technical analysis into the momentum assessment framework, providing a richer dataset for clustering and risk analysis.
+
+```filter_liquid.py```
+
+Aggregates stock data to a monthly frequency for a smoother analysis. Calculates rolling average dollar volumes to measure stock liquidity and retains only the most liquid stocks for analysis. Ensures that selected stocks are practical for trading based on their liquidity. Outputs a refined dataset focusing on high-liquidity stocks.
+
+```RollingOLS.py```
+
+Downloads Fama-French 5-factor data to incorporate macroeconomic factors and calculates rolling regression betas for stocks, measuring sensitivity to each factor. Normalizes the factor betas to standardize their scale. Integrates factor exposures into the overall risk assessment of stocks and prepares the data for use in risk-adjusted momentum analysis.
+
+```momentum_tracker.py```
+
+Identifies stocks with the highest and lowest momentum using RSI. Sorts stocks into momentum-based risk categories: 'Green', 'Red', and 'Grey'. Applies clustering to segment stocks into distinct risk groups then provides actionable insights into stock momentum and risk profiles.
+
+```returns.py```
+
+Computes monthly returns for stocks over specified time horizons. Calculates cumulative returns to assess long-term performance.
+Adjusts returns data for corporate actions like splits and dividends and analyzes returns to identify trends and patterns over time. 
+
 ```clusters.py```
 
 Applies KMeans clustering to group stocks based on specified features, analyzes clusters to identify patterns in stock behavior.
 Visualizes and assesses the resulting clusters using scatter plots. Generates visual representations of clusters over various dates to track changes over time.
+
